@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script type="text/javascript" src="{% static 'TeleCloudApp/js/telecloud_crypto.js' %}"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'TeleCloudApp/css/dashboard.css' %}">
+    <title>TeleCloud</title>
+    <link rel="icon" href="{% static 'TeleCloudApp/icons/cloud_tab.png' %}">
+
+</head>
+
+<body>
+    <nav class="nav | clr-neutral-200">
+        <div class="nav-content-user">
+            <div class="logo">
+                <img src="{% static 'TeleCloudApp/icons/logo-text.svg' %}" alt="">
+            </div>
+            <div class="nav-links">
+                <a href="{% url 'folder_root_view' %}" class="nav-link">
+                    <img class="nav-link-icon" src="{% static 'TeleCloudApp/icons/icon-dashboard.svg' %}" alt="">
+                    <div>Dashboard</div>
+                </a>
+                <a href="{% url 'favorites' %}" class="nav-link">
+                    <img class="nav-link-icon" src="{% static 'TeleCloudApp/icons/icon-favourite.svg' %}" alt="">
+                    <div>Favorites</div>
+                </a>
+                <a href="{% url 'recycle_bin' %}" class="nav-link">
+                    <img class="nav-link-icon" src="{% static 'TeleCloudApp/icons/icon-recycle-bin.svg' %}" alt="">
+                    <div>Recycle Bin</div>
+                </a>                
+                <a href="{% url 'settings_page' %}" class="nav-link">
+                    <img class="nav-link-icon" src="{% static 'TeleCloudApp/icons/icon-settings.svg' %}" alt="">
+                    <div>Settings</div>
+                </a>                
+            </div>
+                {% comment %} <form action="/cloud/logout/" method="POST" class="nav-link">
+                    {% csrf_token %}
+                    <img class="nav-link-icon" src="{% static 'TeleCloudApp/icons/icon-logout.svg' %}" alt="">
+                    <input type="submit" value="Logout">
+                </form> {% endcomment %}
+                <form action="/cloud/logout/" method="POST" class="nav-link">
+                    {% csrf_token %}
+                    <img class="nav-link-icon" src="{% static 'TeleCloudApp/icons/icon-logout.svg' %}" alt="">
+                    <button type="submit">Logout</button>
+                </form>
+        </div>
+    </nav>
+
+    <div class="right-bar | display-f f-column justify-space-between align-center">
+        <div class="account-info">
+            <div class="account-info-content | clr-neutral-200">
+                <div>
+                    <img src="images/img-user.png" alt="">
+                </div>
+                <div class="mt-1">
+                    <span class="ml-1">Kusal </span> <span><img src="{% static 'TeleCloudApp/icons/icon-edit.svg' %}" alt=""></span>
+                    <br>
+                    <div class="fs-200">Saraf</div>
+                </div>
+                <div class="mt-5">
+                    <div>
+                        31.34
+                    </div>
+                    <div>GB</div>
+                    <div class="fs-200">used</div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="icon-upload mb-5">
+                <label for="file-input">
+                  <img src="{% static 'TeleCloudApp/icons/icon-upload.svg' %}" alt="Upload">
+                </label>
+                <form id="upload-form" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <input id="file-input" type="file" name="files" multiple>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="{% static 'TeleCloudApp/js/jquery.waypoints.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'TeleCloudApp/js/infinite.min.js' %}"></script>
+    {% block content %}
+    
+    {% endblock %}
+    
+    <script type="text/javascript" src="{% static 'TeleCloudApp/js/encryption.js' %}"></script>
+    <script type="text/javascript" src="{% static 'TeleCloudApp/js/alert.js' %}"></script>
+    
+</body>
+
+</html>

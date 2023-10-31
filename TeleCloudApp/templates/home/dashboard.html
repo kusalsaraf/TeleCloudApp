@@ -1,0 +1,81 @@
+{% extends 'home/home_base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-container">
+
+    <section class="sec-catagories">
+        <h1 class="fs-800 clr-primary-300 fw-medium mt-3">Catagories</h1>
+
+
+        <div class="display-f gap-2 wrap-wrap mt-2">
+
+            <a href="">
+                <div class="catagory-card bg-clr-accent-500">
+                    <div class="catagory-card-icon">
+                        <img src="{% static 'TeleCloudApp/icons/icon-photos.svg' %}" alt="">
+                    </div>
+                    <div class="catagory-card-body">
+                        <div class="catagory-card-title">
+                            Photos
+                        </div>
+                        <div class="catagory-card-details">
+                            <span>214</span> files
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="">
+                <div class="catagory-card bg-clr-accent-510">
+                    <div class="catagory-card-icon">
+                        <img src="{% static 'TeleCloudApp/icons/icon-videos.svg' %}" alt="">
+                    </div>
+                    <div class="catagory-card-body">
+                        <div class="catagory-card-title">
+                            Videos
+                        </div>
+                        <div class="catagory-card-details">
+                            <span>214</span> files
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="">
+                <div class="catagory-card bg-clr-accent-520">
+                    <div class="catagory-card-icon">
+                        <img src="{% static 'TeleCloudApp/icons/icon-audios.svg' %}" alt="">
+                    </div>
+                    <div class="catagory-card-body">
+                        <div class="catagory-card-title">
+                            Audio
+                        </div>
+                        <div class="catagory-card-details">
+                            <span>214</span> files
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <a href="">
+                <div class="catagory-card bg-clr-accent-530">
+                    <div class="catagory-card-icon">
+                        <img src="{% static 'TeleCloudApp/icons/icon-documents.svg' %}" alt="">
+                    </div>
+                    <div class="catagory-card-body">
+                        <div class="catagory-card-title">
+                            Photos
+                        </div>
+                        <div class="catagory-card-details">
+                            <span>214</span> files
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+
+    </section>
+</div>
+<script type="text/javascript" src="{% static 'TeleCloudApp/js/dashboard.js' %}"></script>
+{% endblock %}

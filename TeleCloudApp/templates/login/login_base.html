@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script type="text/javascript" src="{% static 'TeleCloudApp/js/telecloud_crypto.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'TeleCloudApp/css/login.css' %}">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav class="nav side-nav | clr-neutral-200">
+        <div class="nav-content">
+            <div class="mt-6">
+                <img src="{% static 'TeleCloudApp/icons/logo.svg' %}" alt="">
+                <div class="logo-txt | fw-light fs-800 letter-spacing-100">
+                    Tele Cloud
+                </div>
+                <div class="fs-200">
+                    by Kusal Saraf
+                </div>
+            </div>
+        </div>
+        <div class="copyright | fw-light fs-400">
+            © Kusal Saraf 2023
+        </div>
+    </nav>
+    {% block content %}
+    
+    {% endblock %}
+    <script type="text/javascript" src="{% static 'TeleCloudApp/js/login.js' %}"></script>
+    <script type="text/javascript" src="{% static 'TeleCloudApp/js/encryption.js' %}"></script>
+
+</body>
+
+</html>

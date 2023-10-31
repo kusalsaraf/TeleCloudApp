@@ -1,0 +1,81 @@
+{% extends 'home/home_base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="main-container">
+
+    <h1 class="fs-800 clr-primary-300 fw-medium mt-3 mb-3 display-i-b">Recycle Bin</h1> 
+    <span class="icon-empty-bin ml-2" id="empty-recycle-bin-icon"><img class="icon-empty-bin | display-i" src="/static/TeleCloudApp/icons/icon-empty-bin.svg"
+        alt=""></span>
+
+
+    <section id="all-folder" class="display-f gap-1 wrap-wrap mt-3">
+
+        {% for folder in folder_obj %}
+            <div class="folder-wrapper" id="folder-{{ folder.pk }}">
+                <div class="folder bg-clr-accent-310" id="folder-main-{{ folder.pk }}">
+                    <div class="folder-content">
+                        <div class="folder-icon">
+                            <img src="/static/TeleCloudApp/icons/icon-folder.svg" alt="">
+                        </div>
+                        <div class="folder-info">
+                            <div id="folder-name-{{ folder.pk }}" class="folder-title">
+                                {{folder.name}}
+                            </div>
+                            <div class="folder-details">
+                                <span id="folder-file-number-{{ folder.pk }}" class="details-files-number">{{ folder.file_count }}</span> Files, <span id="folder-contain-number-{{ folder.pk }}" class="details-folder-number">{{folder.numchild}}</span> Folders
+                            </div>
+                        </div>
+                    </div>
+                    <div id="folder-restore-icon-div-{{ folder.pk }}" class="folder-options-restore">
+                        <img class="folder-restore-icon" id="folder-restore-icon-{{ folder.pk }}" src="/static/TeleCloudApp/icons/icon-restore.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </section>
+    <section id="all-files" class="display-f gap-1 wrap-wrap mt-3">
+        {% for file in file_obj %}
+            <div class="file-square-wrapper" id="file-{{ file.pk }}">
+                <div class="file-square">
+                    <div class="file-square-img-wrapper" id="file-img-div-{{ file.pk }}">	
+                        <img class="file-square-img" id="file-url-{{ file.pk }}" src={{file.file_url}} alt="">	
+                    </div>
+                    <div class="file-square-icons">
+                        {% if file.type == "image" %}
+                            <img class="file-square-icon-type" src="{% static 'TeleCloudApp/icons/icon-image.svg' %}" alt="">
+                            <div>
+                                <img class="file-options-restore" id="file-restore-icon-{{ file.pk }}" src="/static/TeleCloudApp/icons/icon-restore.svg" alt="">
+                            </div>
+                        {% elif file.type == "video" %}
+                            <video width="320" height="240" controls>
+                            <source id="file-url-{{ file.pk }}" src={{file.file_url}} type="video/mp4">
+                            </video>
+                        {% else %}
+                            <img class="file-square-icon-type" src="/static/TeleCloudApp/icons/icon-image.svg" alt="">
+                            <div>
+                                <img class="file-options-icon" src="/static/TeleCloudApp/icons/icon-option-dots.svg" alt="">
+                                <img src="/static/TeleCloudApp/icons/icon-star.svg" alt="">
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="file-square-details">
+                        <div class="file-square-name" id="file-name-{{ file.pk }}">
+                            {{file.name}}
+                        </div>
+                        <div class="file-square-size" id="file-size-{{ file.pk }}">
+                            {{file.size/1048576}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+
+</div>
+
+<script type="text/javascript" src="{% static 'TeleCloudApp/js/recycle_bin.js' %}"></script>
+<script type="text/javascript" src="{% static 'TeleCloudApp/js/dashboard.js' %}"></script>
+{% endblock %}

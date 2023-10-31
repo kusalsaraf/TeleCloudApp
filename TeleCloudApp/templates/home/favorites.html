@@ -1,0 +1,64 @@
+{% extends 'home/home_base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="main-container">
+
+    <h1 class="fs-800 clr-primary-300 fw-medium mt-3">Favorites</h1>
+
+    <section id="all-files" class="display-f gap-1 wrap-wrap mt-3">
+        {% for file in file_obj %}
+            <div class="file-square-wrapper" id="file-{{ file.pk }}">
+                <div class="file-square">
+                    <div class="file-square-img-wrapper" id="file-img-div-{{ file.pk }}">	
+                        <img class="file-square-img" id="file-url-{{ file.pk }}" src={{file.file_url}} alt="">	
+                    </div>
+                    <div class="file-square-icons">
+                        {% if file.type == "image" %}
+                            <img class="file-square-icon-type" src="{% static 'TeleCloudApp/icons/icon-image.svg' %}" alt="">
+                            <div>
+                                <img id="file-options-icon-{{file.pk}}" class="file-options-icon" src="{% static 'TeleCloudApp/icons/icon-option-dots.svg' %}" alt="" >
+                                <img id="file-favorite-icon-{{file.pk}}" class="file-favorite-icon" src="{% static 'TeleCloudApp/icons/icon-star.svg' %}" alt="" style="width: 20px;">
+                            </div>
+                        {% elif file.type == "video" %}
+                            <video width="320" height="240" controls>
+                            <source id="file-url-{{ file.pk }}" src={{file.file_url}} type="video/mp4">
+                            </video>
+                        {% else %}
+                            <img class="file-square-icon-type" src="/static/TeleCloudApp/icons/icon-image.svg" alt="">
+                            <div>
+                                <img class="file-options-icon" src="/static/TeleCloudApp/icons/icon-option-dots.svg" alt="">
+                                <img src="/static/TeleCloudApp/icons/icon-star.svg" alt="">
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="file-square-details">
+                        <div class="file-square-name" id="file-name-{{ file.pk }}">
+                            {{file.name}}
+                        </div>
+                        <div class="file-square-size" id="file-size-{{ file.pk }}">
+                            {{file.size}}
+                        </div>
+                    </div>
+                </div>
+                <div id="file-options-list-{{file.pk}}" class="file-options-list-wrapper">
+                    <div class="file-options-list">
+                        <div id="file-option-rename-{{file.pk}}" class="option option-file-rename">
+                            Rename
+                        </div>
+                        <div id="file-option-delete-{{file.pk}}" class="option option-file-delete">
+                            Delete
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </section>
+
+
+</div>
+<script type="text/javascript" src="{% static 'TeleCloudApp/js/file.js' %}"></script>
+<script type="text/javascript" src="{% static 'TeleCloudApp/js/dashboard.js' %}"></script>
+{% endblock %}
