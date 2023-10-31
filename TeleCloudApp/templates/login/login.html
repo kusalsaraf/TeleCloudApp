@@ -1,0 +1,32 @@
+{% extends 'login/login_base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-container | display-f align-center justify-center">
+    <form id="login_form" class="login-form mt-6" action="">
+        <label for="email">Email</label>
+        <br>
+        <input id="login_email" type="email">
+        <br>
+        <label class="mt-2" for="password">Password</label>
+        <br>
+        <input id="password_login" type="password">
+        <br><br>
+        <img id="captcha_image" src="/static/TeleCloudApp/captcha_images/{{ captcha_image }}" />
+        <img id="captcha_image_refresh_button" src="{% static 'TeleCloudApp/icons/refresh_captcha.svg' %}" alt="">
+        <br> <br>
+        <input id="captcha_image_input" type="text">
+        <div class="mt-2">
+            <div class="display-f justify-space-between">
+                {% csrf_token %}
+                <button id="login_btn" class="button btn-fill" onclick="login_function(event)">Log In</button>
+                <button class="button btn-outline">Google Log In</button>
+            </div>
+            <div class="fw-regular fs-400 clr-primary-300 mt-3">
+                <a href="/cloud/signup/">Create a new account</a> 
+            </div>
+            <div class="fw-regular fs-400 clr-neutral-800 mt-1"><a href="/cloud/reset-password/">Forget Password ?</a> 
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

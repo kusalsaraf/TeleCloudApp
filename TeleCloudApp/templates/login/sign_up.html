@@ -1,0 +1,26 @@
+{% extends 'login/login_base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-container | display-f align-center justify-center">
+    <form id="login_form" class="login-form mt-6" action="POST">
+        {% csrf_token %}
+        <label for="First Name">First Name</label>
+        <br> <br>
+        <input id="first_name" type="text">
+        <br> <br>
+        <label for="Last Name">Last Name</label>
+        <br> <br>
+        <input id="last_name" type="text">
+        <br> <br>
+        <label for="Email">Email</label>
+        <br> <br>
+        <input id="email_id" type="email">
+        <br><br>
+        <div class="mt-2">
+            <div class="display-f justify-space-between">
+                <button class="button btn-fill" onclick="sign_up(event)">Create Account</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

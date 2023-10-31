@@ -1,0 +1,80 @@
+{% extends 'home/home_base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="main-container | display-f f-column justify-center align-center">
+
+    <h1 class="fs-800 clr-primary-300 fw-medium mt-3">Settings</h1>
+
+    <div class="settings-panel | mt-3 mb-6 fs-body">
+        <div>
+            <div class="name-profile | display-f gap-1 align-center">
+                <div class="fs-800 fw-medium clr-primary-300">
+                    {{ request.user.first_name }} {{ request.user.last_name }}
+                </div>
+                <div class="edit-btn-name">
+                    <img src="/static/TeleCloudApp/icons/icon-edit.svg" alt="">
+                </div>
+            </div>
+            <hr class="mb-3">
+        </div>
+
+        <div class="display-f f-column gap-4">
+            <div class="display-f f-column gap-2">
+                <div>
+                    <div class="fw-regular fs-500">Bot Token</div>
+                    <div class="display-f align-center gap-2">
+                        <div>{{bot_token}}</div>
+                        <div><img class="icon edit-btn-bot-token" src="/static/TeleCloudApp/icons/icon-edit-circle.svg" alt=""></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="fw-regular fs-500">Chat Id</div>
+                    <div class="display-f align-center gap-2">
+                        <div>{{chat_id}}</div>
+                        <div><img class="icon edit-btn-chat-id" src="/static/TeleCloudApp/icons/icon-edit-circle.svg" alt=""></div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <div class="display-f justify-center">
+                <button class="button btn-fill | mt-2 mb-2">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay-form overlay-form-name | align-center justify-center">
+        <form class="form-name | display-f align-center f-column gap-1" action="">
+            <label for="name">Change name</label>
+            <input class="input-form-name" type="text" id="name">
+            <button><img src="/static/TeleCloudApp/icons/icon-check.svg" alt=""></button>
+        </form>
+        <div class="icon-cross-wrapper"><img src="/static/TeleCloudApp/icons/icon-cross.svg" alt=""></div>
+    </div>
+
+    <div class="overlay-form overlay-form-email | align-center justify-center">
+        <form class="form-name | display-f align-center f-column gap-1" action="">
+            <label for="email">New email</label>
+            <input class="input-form-email" type="text" id="email">
+            <label for="otp">Enter OTP</label>
+            <input type="text" id="otp">
+            <button><img src="/static/TeleCloudApp/icons/icon-check.svg" alt=""></button>
+        </form>
+        <div class="icon-cross-wrapper"><img src="/static/TeleCloudApp/icons/icon-cross.svg" alt=""></div>
+    </div>
+
+    <div class="overlay-form overlay-form-phone | align-center justify-center">
+        <form class="form-name | display-f align-center f-column gap-1" action="">
+            <label for="phone">New phone number</label>
+            <input class="input-form-phone" type="text" id="phone">
+            <label for="otp">Enter OTP</label>
+            <input type="text" id="otp">
+            <button><img src="/static/TeleCloudApp/icons/icon-check.svg" alt=""></button>
+        </form>
+        <div class="icon-cross-wrapper"><img src="/static/TeleCloudApp/icons/icon-cross.svg" alt=""></div>
+    </div>
+
+</div>
+<script type="text/javascript" src="{% static 'TeleCloudApp/js/settings.js' %}"></script>
+{% endblock %}

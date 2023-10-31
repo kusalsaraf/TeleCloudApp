@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>File Input Example</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <div>
+    {% csrf_token %}
+    <label for="file">Select a file:</label>
+    <input type="file" id="file" name="file">
+  </div>
+  <div>
+    <button id="submit-btn">Upload</button>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('file');
+    const submitButton = document.getElementById('submit-btn');
+    function get_csrf_token() {
+        var CSRF_TOKEN = $('input[name="csrfmiddlewaretoken"]').val();
+        return CSRF_TOKEN;
+    }
+
+    submitButton.addEventListener('click', async () => {
+        const file = fileInput.files[0];
+        const formData = new FormData();
+        formData.append('file', file);
+
+        $.ajax({
+            url: "/cloud/file/upload/",
+            type: "POST",
+            data: formData,
+            headers: {
+                'X-CSRFToken': get_csrf_token(),
+            },
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                console.log("res", response)
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.error(textStatus, errorThrown);
+            }
+        });
+
+    });
+  </script>
+</body>
+</html>

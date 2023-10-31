@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Gallery</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightbox2/dist/css/lightbox.min.css">
+    <style>
+        #gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        #gallery a {
+            margin: 10px;
+        }
+
+        #gallery img {
+            max-width: 200px;
+            max-height: 200px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/lightbox2/dist/js/lightbox.min.js"></script>
+</head>
+<body>
+    <h1>Image Gallery</h1>
+
+    <div id="gallery">
+        <script>
+                var galleryContainer = document.getElementById('gallery');
+
+                var files_data = {{files_data|safe}}
+                console.log("imageLinks",files_data)
+                for (var i = 0; i < files_data.length; i++) {
+                    var imageLink = files_data[i]["file_url"];
+
+                    var anchorElement = document.createElement('a');
+                    anchorElement.href = imageLink;
+                    anchorElement.setAttribute('data-lightbox', 'gallery');
+                    anchorElement.innerHTML = '<img src="' + imageLink + '">';
+
+                    galleryContainer.appendChild(anchorElement);
+                }
+        </script>
+    </div>
+</body>
+</html>

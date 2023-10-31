@@ -1,0 +1,126 @@
+{% extends 'home/home_base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="main-container">
+    
+    <img id="folder-icon-back" class="icon-back | mr-2 display-i-b" src="/static/TeleCloudApp/icons/icon-back.svg" alt="" style="display:none">
+
+    <h1 class="fs-800 clr-primary-300 fw-medium mt-3 display-i-b">Folders</h1>
+
+    <span class="icon-add-folder ml-2">
+        <img class="display-i" src="{% static 'TeleCloudApp/icons/icon-add-folder.svg' %}" alt="">
+    </span>
+
+    <div class="dir-path | mt-2 fs-500">
+        <span id="folder-path" class="dir-path | mt-2 fs-500">root</span>
+    </div>
+
+    <section id="all-folder" class="display-f gap-1 wrap-wrap mt-3">
+
+        {% for folder in folder_obj %}
+            <div class="folder-wrapper" id="folder-{{ folder.pk }}">
+                <div class="folder bg-clr-accent-310" id="folder-main-{{ folder.pk }}">
+                    <div class="folder-content">
+                        <div class="folder-icon">
+                            <img src="/static/TeleCloudApp/icons/icon-folder.svg" alt="">
+                        </div>
+                        <div class="folder-info">
+                            <div id="folder-name-{{ folder.pk }}" class="folder-title">
+                                {{folder.name}}
+                            </div>
+                            <div class="folder-details">
+                                <span id="folder-file-number-{{ folder.pk }}" class="details-files-number">{{ folder.file_count }}</span> Files, <span id="folder-contain-number-{{ folder.pk }}" class="details-folder-number">{{folder.numchild}}</span> Folders
+                            </div>
+                        </div>
+                    </div>
+                    <div id="folder-options-icon-{{ folder.pk }}" class="folder-options">
+                        <img class="folder-option-icon" src="/static/TeleCloudApp/icons/icon-option-dots.svg" alt="">
+                    </div>
+                </div>
+                <div id="folder-options-list-{{ folder.pk }}" class="folder-options-list-wrapper">
+                    <div class="folder-options-list">
+                        <div id="folder-option-rename-{{ folder.pk }}" class="option option-rename">
+                            Rename
+                        </div>
+                        <div id="folder-option-delete-{{ folder.pk }}" class="option option-delete">
+                            Delete
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </section>
+    <section id="all-files" class="display-f gap-1 wrap-wrap mt-3 infinite-container">
+        {% for file in file_obj %}
+            <div class="file-square-wrapper infinite-item" id="file-{{ file.pk }}">
+                <div class="file-square">
+                    <div class="file-square-img-wrapper" id="file-img-div-{{ file.pk }}">	
+                        <img class="file-square-img" id="file-url-{{ file.pk }}" src={{file.file_url}} alt="">	
+                    </div>
+                    <div class="file-square-icons">
+                        {% if file.type == "image" %}
+                            <img class="file-square-icon-type" src="{% static 'TeleCloudApp/icons/icon-image.svg' %}" alt="">
+                            <div>
+                                <img id="file-options-icon-{{file.pk}}" class="file-options-icon" src="{% static 'TeleCloudApp/icons/icon-option-dots.svg' %}" alt="" >
+                                {% if file.is_favorite %}
+                                    <img id="file-favorite-icon-{{file.pk}}" class="file-favorite-icon" src="{% static 'TeleCloudApp/icons/icon-star.svg' %}" alt="" style="width: 20px;">
+                                {% else %}
+                                    <img id="file-favorite-icon-{{file.pk}}" class="file-favorite-icon" src="{% static 'TeleCloudApp/icons/icon-star-empty.svg' %}" alt="" style="width: 20px;">
+                                {% endif %}
+                            </div>
+                        {% elif file.type == "video" %}
+                            <video width="320" height="240" controls>
+                            <source id="file-url-{{ file.pk }}" src={{file.file_url}} type="video/mp4">
+                            </video>
+                        {% else %}
+                            <img class="file-square-icon-type" src="/static/TeleCloudApp/icons/icon-image.svg" alt="">
+                            <div>
+                                <img class="file-options-icon" src="/static/TeleCloudApp/icons/icon-option-dots.svg" alt="">
+                                <img src="/static/TeleCloudApp/icons/icon-star.svg" alt="">
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="file-square-details">
+                        <div class="file-square-name" id="file-name-{{ file.pk }}">
+                            {{file.name}}
+                        </div>
+                        <div class="file-square-size" id="file-size-{{ file.pk }}">
+                            {% comment %} {{ file.size|divisibleby:1048576 }} {% endcomment %}
+                            {{ file.file_size_mb }} MB
+                            
+                        </div>
+                    </div>
+                </div>
+                <div id="file-options-list-{{file.pk}}" class="file-options-list-wrapper">
+                    <div class="file-options-list">
+                        <div id="file-option-rename-{{file.pk}}" class="option option-file-rename">
+                            Rename
+                        </div>
+                        <div id="file-option-delete-{{file.pk}}" class="option option-file-delete">
+                            Delete
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        
+    </section>
+    {% if file_obj.has_next %}
+    <a class="infinite-more-link" href="?page={{ file_obj.next_page_number }}" style="display:none">next</a>
+    {% endif %}
+</div>
+<script type="text/javascript" src="{% static 'TeleCloudApp/js/folders.js' %}"></script>
+<script type="text/javascript" src="{% static 'TeleCloudApp/js/dashboard.js' %}"></script>
+<script type="text/javascript" src="{% static 'TeleCloudApp/js/file.js' %}"></script>
+<script>
+    var infinite = new Waypoint.Infinite({
+        element: $('.infinite-container')[0],
+
+        offset: 'bottom-in-view',
+
+    });
+</script>
+{% endblock %}
